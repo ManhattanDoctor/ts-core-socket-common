@@ -1,2 +1,2 @@
 # ts-core-socket-common
-Common classes and util for socket
+Classes and utils for socket-common
