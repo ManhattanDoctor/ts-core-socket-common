@@ -42,7 +42,7 @@ export abstract class TransportSocketImpl extends TransportImpl<ITransportSettin
             this.commandRequestResponseReceived(promise, payload.response);
         }
     }
-
+    
     // --------------------------------------------------------------------------
     //
     //  Response Methods
