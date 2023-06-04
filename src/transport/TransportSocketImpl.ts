@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { ClassType, DateUtil, ExtendedError, ITransportCommand, ITransportCommandAsync, ITransportCommandRequest, ITransportSettings, ObjectUtil, TransportCommand, TransportCommandAsync, TransportImpl, TransportLogType, ValidateUtil } from '@ts-core/common';
+import { ClassType, DateUtil, ExtendedError, ITransportCommand, ITransportCommandAsync, ITransportCommandRequest, ITransportEvent, ITransportSettings, ObjectUtil, TransformUtil, TransportCommand, TransportCommandAsync, TransportEvent, TransportImpl, TransportLogType, ValidateUtil } from '@ts-core/common';
 import { ITransportSocketEventOptions } from './ITransportSocketEventOptions';
 import { TransportSocketRequestPayload } from './TransportSocketRequestPayload';
 import { ITransportSocketCommandOptions } from './ITransportSocketCommandOptions';
@@ -42,7 +42,7 @@ export abstract class TransportSocketImpl extends TransportImpl<ITransportSettin
             this.commandRequestResponseReceived(promise, payload.response);
         }
     }
-    
+
     // --------------------------------------------------------------------------
     //
     //  Response Methods
@@ -96,6 +96,33 @@ export abstract class TransportSocketImpl extends TransportImpl<ITransportSettin
         this.requests.set(command.id, item);
         return item;
     }
+
+    // --------------------------------------------------------------------------
+    //
+    //  Event Methods
+    //
+    // --------------------------------------------------------------------------
+
+    protected requestEventReceived = <U>(item: any): void => {
+        if (_.isNil(item) || _.isNil(item.uid)) {
+            this.warn(`Received nil or invalid event`);
+            return;
+        }
+
+        let event: ITransportEvent<U> = null;
+        try {
+            event = this.createEvent(item)
+        } catch (error) {
+            this.warn(`Received invalid event: ${error.message}`);
+            return;
+        }
+        this.eventRequestReceived(event);
+    }
+
+    protected createEvent<U>(item: any): ITransportEvent<U> {
+        return TransformUtil.toClass(TransportEvent, item);
+    }
+
 }
 
 export interface ITransportSocketCommandRequest extends ITransportCommandRequest {
