@@ -1,3 +1,4 @@
+export const TRANSPORT_SOCKET_ERROR = 'transportSocketError';
 export const TRANSPORT_SOCKET_EVENT = 'transportSocketEvent';
 export const TRANSPORT_SOCKET_CONNECTED = 'transportSocketConnected';
 export const TRANSPORT_SOCKET_COMMAND_REQUEST_METHOD = 'transportSocketCommandRequest';

@@ -73,7 +73,7 @@ export abstract class TransportSocketImpl extends TransportImpl<ITransportSettin
 
         this.logCommand(command, TransportLogType.REQUEST_RECEIVED);
         let request = this.checkRequestStorage(command, payload);
-        this.commandResponseDispatch(command, payload.options, payload.isNeedReply);
+        this.commandResponseRequestDispatch(command, payload.options, payload.isNeedReply);
     }
 
     protected createCommand<U>(item: ITransportSocketRequestPayload<U>): ITransportCommand<U> {
@@ -90,7 +90,7 @@ export abstract class TransportSocketImpl extends TransportImpl<ITransportSettin
 
         item = { waited: 0, isNeedReply: payload.isNeedReply, expired: null };
         item = ObjectUtil.copyProperties(payload.options, item);
-        if (payload.isNeedReply) {
+        if (item.isNeedReply) {
             item.expired = DateUtil.getDate(Date.now() + this.getCommandTimeoutDelay(command, payload.options));
         }
         this.requests.set(command.id, item);
@@ -122,7 +122,6 @@ export abstract class TransportSocketImpl extends TransportImpl<ITransportSettin
     protected createEvent<U>(item: any): ITransportEvent<U> {
         return TransformUtil.toClass(TransportEvent, item);
     }
-
 }
 
 export interface ITransportSocketCommandRequest extends ITransportCommandRequest {
