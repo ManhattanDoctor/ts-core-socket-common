@@ -5,6 +5,14 @@ import { TransportSocketUserId } from './TransportSocketUserId';
 
 export class TransportSocketCommandOptions extends TransportCommandOptions implements ITransportSocketCommandOptions {
     @IsOptional()
+    @IsString()
+    room?: string;
+
+    @IsOptional()
+    @IsString()
+    clientId?: string;
+
+    @IsOptional()
     userId?: TransportSocketUserId;
 
     @IsOptional()

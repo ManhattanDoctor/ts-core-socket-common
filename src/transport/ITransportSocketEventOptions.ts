@@ -1,7 +1,9 @@
 import { TransportSocketUserId } from "./TransportSocketUserId";
 
 export interface ITransportSocketEventOptions {
-    userId?: TransportSocketUserId;
+    room?: string;
     clientId?: string;
+
+    userId?: TransportSocketUserId;
     isOnlyOne?: boolean;
 }
