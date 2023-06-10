@@ -1,5 +1,7 @@
+import { TransportSocketUserId } from "./TransportSocketUserId";
+
 export interface ITransportSocketEventOptions {
-    userId?: string;
+    userId?: TransportSocketUserId;
     clientId?: string;
     isOnlyOne?: boolean;
 }

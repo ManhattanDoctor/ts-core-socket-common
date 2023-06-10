@@ -6,6 +6,7 @@ import { ITransportSocketCommandOptions } from './ITransportSocketCommandOptions
 import { ITransportSocketRequestPayload } from './ITransportSocketRequestPayload';
 import { TransportSocketResponsePayload } from './TransportSocketResponsePayload';
 import { ITransportSocketResponsePayload } from './ITransportSocketResponsePayload';
+import { TransportSocketUserId } from './TransportSocketUserId';
 
 export abstract class TransportSocketImpl extends TransportImpl<ITransportSettings, ITransportSocketCommandOptions, ITransportSocketCommandRequest, ITransportSocketEventOptions> {
     // --------------------------------------------------------------------------
@@ -125,6 +126,6 @@ export abstract class TransportSocketImpl extends TransportImpl<ITransportSettin
 }
 
 export interface ITransportSocketCommandRequest extends ITransportCommandRequest {
-    userId?: string;
+    userId?: TransportSocketUserId;
     clientId?: string;
 }

@@ -7,3 +7,4 @@ export * from './transport/TransportSocketCommandOptions';
 export * from './transport/TransportSocketImpl';
 export * from './transport/TransportSocketRequestPayload';
 export * from './transport/TransportSocketResponsePayload';
+export * from './transport/TransportSocketUserId';

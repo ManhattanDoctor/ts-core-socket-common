@@ -3,6 +3,7 @@ import { TransformUtil, ValidateUtil, ExtendedError, TransportInvalidDataError, 
 import { IsOptional, IsString } from 'class-validator';
 import { ITransportSocketResponsePayload } from './ITransportSocketResponsePayload';
 import * as _ from 'lodash';
+import { TransportSocketUserId } from './TransportSocketUserId';
 
 export class TransportSocketResponsePayload<U = any, V = any> implements ITransportSocketResponsePayload<V> {
     // --------------------------------------------------------------------------
@@ -43,8 +44,7 @@ export class TransportSocketResponsePayload<U = any, V = any> implements ITransp
     public id: string;
 
     @IsOptional()
-    @IsString()
-    public userId?: string;
+    public userId?: TransportSocketUserId;
 
     @IsOptional()
     @IsString()
