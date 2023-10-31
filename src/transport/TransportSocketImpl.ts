@@ -8,7 +8,7 @@ import { TransportSocketResponsePayload } from './TransportSocketResponsePayload
 import { ITransportSocketResponsePayload } from './ITransportSocketResponsePayload';
 import { TransportSocketUserId } from './TransportSocketUserId';
 
-export abstract class TransportSocketImpl extends TransportImpl<ITransportSettings, ITransportSocketCommandOptions, ITransportSocketCommandRequest, ITransportSocketEventOptions> {
+export abstract class TransportSocketImpl<S extends ITransportSettings = ITransportSettings> extends TransportImpl<S, ITransportSocketCommandOptions, ITransportSocketCommandRequest, ITransportSocketEventOptions> {
     // --------------------------------------------------------------------------
     //
     //  Request Methods
