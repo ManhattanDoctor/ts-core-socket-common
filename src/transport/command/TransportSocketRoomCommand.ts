@@ -1,7 +1,7 @@
-import { TransformUtil, TransportCommand } from "@ts-core/common";
-import { IsDefined, IsEnum } from 'class-validator';
+import { TransformUtil, TransportCommandAsync } from "@ts-core/common";
+import { IsEnum, IsString } from 'class-validator';
 
-export class TransportSocketRoomCommand<T = string> extends TransportCommand<ITransportSocketRoomDto<T>>{
+export class TransportSocketRoomCommand extends TransportCommandAsync<ITransportSocketRoomDto, string> {
     // --------------------------------------------------------------------------
     //
     //  Public Static Properties
@@ -16,13 +16,13 @@ export class TransportSocketRoomCommand<T = string> extends TransportCommand<ITr
     //
     // --------------------------------------------------------------------------
 
-    constructor(request: ITransportSocketRoomDto<T>) {
-        super(TransportSocketRoomCommand.NAME, TransformUtil.toClass(TransportSocketRoomDto<T>, request));
+    constructor(request: ITransportSocketRoomDto) {
+        super(TransportSocketRoomCommand.NAME, TransformUtil.toClass(TransportSocketRoomDto, request));
     }
 }
 
-export interface ITransportSocketRoomDto<T = string> {
-    name: T;
+export interface ITransportSocketRoomDto {
+    name: string;
     action: TransportSocketRoomAction;
 }
 export enum TransportSocketRoomAction {
@@ -30,10 +30,10 @@ export enum TransportSocketRoomAction {
     REMOVE = 'REMOVE',
 }
 
-class TransportSocketRoomDto<T> implements ITransportSocketRoomDto<T> {
-    @IsDefined()
-    name: T;
+class TransportSocketRoomDto implements ITransportSocketRoomDto {
+    @IsString()
+    public name: string;
 
     @IsEnum(TransportSocketRoomAction)
-    action: TransportSocketRoomAction;
+    public action: TransportSocketRoomAction;
 }
